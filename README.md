@@ -1,3 +1,6 @@
+# projeto-desenvolvimento-web-com-react
+In this initial phase, this project addresses all the requirements outlined in the Performance Test 1 by the INFNET Institute.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,4 +71,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# projeto-desenvolvimento-web-com-react
+
