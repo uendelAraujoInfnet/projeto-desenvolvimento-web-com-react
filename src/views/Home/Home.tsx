@@ -1,8 +1,15 @@
 import React from 'react'
+import "./Home.scss"
+import CustomButton from '../../components/Button'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <>
+      <div className='HomeContainer'>
+        Home
+        <CustomButton label="Botão Teste" />
+      </div>
+    </>
   )
 }
 
