@@ -1,12 +1,17 @@
 import React from 'react';
 import Button from '@mui/material/Button';
+import { CustomButtonProps } from '../interfaces/interface';
+import { useNavigate } from 'react-router-dom';
 
-interface CustomButtonProps {
-    label: string;
-}
+const CustomButton: React.FC<CustomButtonProps> = ({ label, navigateTo }) => {
 
-const CustomButton: React.FC<CustomButtonProps> = ({ label }) => {
-    return <Button variant="contained">{label}</Button>;
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(navigateTo);
+    };
+
+    return <Button variant="contained" onClick={handleClick}>{label}</Button>;
 };
 
 export default CustomButton;

@@ -1,0 +1,25 @@
+.AlertManager_button {
+  border-radius: 5px;
+  height: 50px;
+  font-weight: bold;
+}
+
+.successButton {
+  background-color: #9cf89f;
+  color: rgb(5, 5, 5);
+}
+
+.errorButton {
+  background-color: #f44336;
+  color: white;
+}
+
+.infoButton {
+  background-color: #2196f3;
+  color: white;
+}
+
+.warningButton {
+  background-color: #ffeb3b;
+  color: black;
+}
