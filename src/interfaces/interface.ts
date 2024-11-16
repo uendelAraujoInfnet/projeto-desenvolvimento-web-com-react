@@ -11,3 +11,18 @@ export interface CustomButtonProps {
 export interface AvatarProps {
   name: string;
 }
+
+export interface BoxProps {
+  children: React.ReactNode;
+}
+
+export interface CardProps {
+  title: string;
+  description: string;
+}
+
+export interface CheckboxProps {
+  label: string;
+  checked: boolean;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+}
