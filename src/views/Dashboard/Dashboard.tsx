@@ -5,6 +5,10 @@ import AlertManager from '../../components/managerComponents/AlertManager'
 import BoxManager from '../../components/managerComponents/BoxManager'
 import CardManager from '../../components/managerComponents/CardManager'
 import CheckboxManager from '../../components/managerComponents/CheckboxManager'
+import ContainerManager from '../../components/managerComponents/ContainerManager'
+import DatePickersManager from '../../components/managerComponents/DatePickersManager'
+import FabManager from '../../components/managerComponents/FabManager'
+import GridManager from '../../components/managerComponents/GridManager'
 
 
 const Dashboard = () => {
@@ -22,6 +26,14 @@ const Dashboard = () => {
       <CardManager />
       <br />
       <CheckboxManager/>
+      <br />
+      <ContainerManager/>
+      <br />
+      <DatePickersManager/>
+      <br />
+      <FabManager/>
+      <br />
+      <GridManager/>
       <br />
       <CustomButton label="Go To Home Page" navigateTo='/'/>
     </div>

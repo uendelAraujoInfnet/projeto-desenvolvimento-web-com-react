@@ -26,3 +26,11 @@ export interface CheckboxProps {
   checked: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
 }
+
+export interface ContainerProps {
+  children: React.ReactNode;
+}
+
+export interface FabProps {
+  onClick: () => void;
+}
