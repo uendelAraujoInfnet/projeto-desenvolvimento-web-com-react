@@ -9,6 +9,12 @@ import ContainerManager from '../../components/managerComponents/ContainerManage
 import DatePickersManager from '../../components/managerComponents/DatePickersManager'
 import FabManager from '../../components/managerComponents/FabManager'
 import GridManager from '../../components/managerComponents/GridManager'
+import IconButtonManager from '../../components/managerComponents/IconButtonManager'
+import SnackBarManager from '../../components/managerComponents/SnackBarManager'
+import SwitchManager from '../../components/managerComponents/SwitchManager'
+import TabManager from '../../components/managerComponents/TabManager'
+import TextFieldManager from '../../components/managerComponents/TextFieldManager'
+import TypographyManager from '../../components/managerComponents/TypographyManager'
 
 
 const Dashboard = () => {
@@ -34,6 +40,18 @@ const Dashboard = () => {
       <FabManager/>
       <br />
       <GridManager/>
+      <br />
+      <IconButtonManager/>
+      <br />
+      <SnackBarManager/>
+      <br />
+      <SwitchManager/>
+      <br />
+      <TabManager/>
+      <br />
+      <TextFieldManager/>
+      <br />
+      <TypographyManager/>
       <br />
       <CustomButton label="Go To Home Page" navigateTo='/'/>
     </div>
