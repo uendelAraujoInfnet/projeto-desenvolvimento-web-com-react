@@ -6,7 +6,7 @@ import SignUp from './views/SignUp/SignUp';
 import Dashboard from './views/Dashboard/Dashboard';
 import Settings from './views/Settings/Settings';
 import Form from './views/Form/Form';
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 
 const App: React.FC = () => {
     // Simulando autenticação

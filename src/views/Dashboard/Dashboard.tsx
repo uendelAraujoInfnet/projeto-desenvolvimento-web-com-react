@@ -1,6 +1,6 @@
 import React from 'react'
 import AvatarManager from '../../components/managerComponents/AvatarManager'
-import CustomButton from '../../components/Button'
+import CustomButton from '../../components/buttonComponent/Button'
 import AlertManager from '../../components/managerComponents/AlertManager'
 import BoxManager from '../../components/managerComponents/BoxManager'
 import CardManager from '../../components/managerComponents/CardManager'

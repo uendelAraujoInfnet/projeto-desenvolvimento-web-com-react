@@ -1,5 +1,5 @@
 import React from 'react';
-import DatePickersComponent from '../DatePickersComponent';
+import DatePickersComponent from '../datePickersComponent/DatePickersComponent';
 
 const DatePickersManager: React.FC = () => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import GridComponent from '../GridComponent';
+import GridComponent from '../gridComponent/GridComponent';
 
 const GridManager: React.FC = () => {
   return (

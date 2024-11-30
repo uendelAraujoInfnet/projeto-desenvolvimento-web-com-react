@@ -1,5 +1,5 @@
 import React from 'react';
-import TypographyComponent from '../TypographyComponent';
+import TypographyComponent from '../typographyComponent/TypographyComponent';
 
 const TypographyManager: React.FC = () => {
   return (
