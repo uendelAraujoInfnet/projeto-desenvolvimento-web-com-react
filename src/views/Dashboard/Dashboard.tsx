@@ -1,62 +1,35 @@
-import React from 'react'
-import AvatarManager from '../../components/managerComponents/AvatarManager'
-import CustomButton from '../../components/buttonComponent/Button'
-import AlertManager from '../../components/managerComponents/AlertManager'
-import BoxManager from '../../components/managerComponents/BoxManager'
-import CardManager from '../../components/managerComponents/CardManager'
-import CheckboxManager from '../../components/managerComponents/CheckboxManager'
-import ContainerManager from '../../components/managerComponents/ContainerManager'
-import DatePickersManager from '../../components/managerComponents/DatePickersManager'
-import FabManager from '../../components/managerComponents/FabManager'
-import GridManager from '../../components/managerComponents/GridManager'
-import IconButtonManager from '../../components/managerComponents/IconButtonManager'
-import SnackBarManager from '../../components/managerComponents/SnackBarManager'
-import SwitchManager from '../../components/managerComponents/SwitchManager'
-import TabManager from '../../components/managerComponents/TabManager'
-import TextFieldManager from '../../components/managerComponents/TextFieldManager'
-import TypographyManager from '../../components/managerComponents/TypographyManager'
+import React, { useEffect, useState } from 'react';
+import { fetchSummary } from '../../services/database';
 
+const Dashboard: React.FC = () => {
+  const [summary, setSummary] = useState<any>({});
+  const [loading, setLoading] = useState(true);
 
-const Dashboard = () => {
+  const loadSummary = async () => {
+    try {
+      const data = await fetchSummary();
+      setSummary(data);
+    } catch (error) {
+      console.error('Erro ao carregar resumo:', error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadSummary();
+  }, []);
+
+  if (loading) return <p>Carregando...</p>;
+
   return (
-    <div style={{padding: 20}}>
-      
-      <CustomButton label="Go To Home Page" navigateTo='/'/>
-      <h1>Bem-vindo ao Dashboard</h1>
-      <AlertManager/>
-      <br />
-      <AvatarManager />
-      <br />
-      <BoxManager />
-      <br />
-      <CardManager />
-      <br />
-      <CheckboxManager/>
-      <br />
-      <ContainerManager/>
-      <br />
-      <DatePickersManager/>
-      <br />
-      <FabManager/>
-      <br />
-      <GridManager/>
-      <br />
-      <IconButtonManager/>
-      <br />
-      <SnackBarManager/>
-      <br />
-      <SwitchManager/>
-      <br />
-      <TabManager/>
-      <br />
-      <TextFieldManager/>
-      <br />
-      <TypographyManager/>
-      <br />
-      <CustomButton label="Go To Home Page" navigateTo='/'/>
+    <div>
+      <h1>Dashboard</h1>
+      <p>Total de Fraldas Trocadas: {summary.totalDiaper || 0}</p>
+      <p>Tempo Médio de Sono: {summary.avgSleep || 0} horas</p>
+      <p>Total de Alimentações Registradas: {summary.totalEat || 0}</p>
     </div>
-    
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
