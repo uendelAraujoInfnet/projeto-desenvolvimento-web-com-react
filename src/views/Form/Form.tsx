@@ -36,14 +36,17 @@ const Form: React.FC = () => {
   // Função para salvar ou atualizar um item
   const handleSave = async () => {
     try {
+      const newItem = { id: crypto.randomUUID(), type, description }; // Gerar um id único para o exemplo
       if (id) {
-        await updateItem('records', id, { type, description });
+        await updateItem('records', id, newItem);
         alert('Item atualizado com sucesso!');
       } else {
-        await insertItem('records', { type, description });
+        const insertedItem = await insertItem('records', newItem); // Supondo que `insertItem` retorna o registro salvo
         alert('Item criado com sucesso!');
+        navigate('/', { state: { newItem: insertedItem } }); // Passar o novo item para o estado da rota
+        return;
       }
-      navigate('/'); // Redireciona para a página Home
+      navigate('/');
     } catch (error) {
       alert('Erro ao salvar o item.');
     }

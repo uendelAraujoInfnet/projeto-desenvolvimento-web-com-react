@@ -10,7 +10,8 @@ const Dashboard: React.FC = () => {
       const data = await fetchSummary();
       setSummary(data);
     } catch (error) {
-      console.error('Erro ao carregar resumo:', error.message);
+      const err = error as Error; // Garantindo o tipo do erro
+      console.error('Erro ao carregar resumo:', err.message);
     } finally {
       setLoading(false);
     }

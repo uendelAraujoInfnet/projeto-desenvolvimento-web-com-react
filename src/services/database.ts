@@ -85,7 +85,7 @@ export const fetchSummary = async () => {
   const { data, error } = await supabase.rpc('get_summary');
   if (error) {
     console.error('Erro ao buscar resumo:', error);
-    throw error;
+    throw new Error(error.message);
   }
   return data[0];
 };

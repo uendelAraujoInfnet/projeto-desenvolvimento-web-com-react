@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import CustomList from '../../components/customListComponent/CustomList';
 import { fetchPaginatedItems } from '../../services/database';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+
+interface Item {
+  id: string;
+  description: string;
+}
 
 const Home: React.FC = () => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<Item[]>([]);
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
+  const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const itemsPerPage = 10; // Número de itens por página
+  const itemsPerPage = 10;
 
   // Carregar itens paginados do banco de dados
   const loadItems = async () => {
@@ -17,10 +23,10 @@ const Home: React.FC = () => {
     setLoading(true);
 
     try {
-      const data = await fetchPaginatedItems('records', page, itemsPerPage);
+      const data: Item[] = await fetchPaginatedItems('records', page, itemsPerPage);
 
       if (data.length < itemsPerPage) {
-        setHasMore(false); // Não há mais itens para carregar
+        setHasMore(false);
       }
 
       setItems((prev) => [...prev, ...data]);
@@ -31,10 +37,18 @@ const Home: React.FC = () => {
     }
   };
 
-  // Recarregar itens ao mudar a página
+  // Carregar itens ao mudar de página
   useEffect(() => {
     loadItems();
   }, [page]);
+
+  // Adicionar um novo item da rota, se não existir na lista
+  useEffect(() => {
+    const newItem = location.state?.newItem as Item | undefined;
+    if (newItem && !items.some((item) => item.id === newItem.id)) {
+      setItems((prev) => [newItem, ...prev]); // Adicionar ao início
+    }
+  }, [location.state, items]);
 
   return (
     <div>
@@ -46,7 +60,7 @@ const Home: React.FC = () => {
         <>
           <CustomList
             items={items}
-            onEdit={(id) => navigate(`/form/${id}`)} // Navegar para edição
+            onEdit={(id) => navigate(`/form/${id}`)}
           />
           {hasMore && !loading && (
             <button onClick={() => setPage((prev) => prev + 1)}>Carregar Mais</button>
