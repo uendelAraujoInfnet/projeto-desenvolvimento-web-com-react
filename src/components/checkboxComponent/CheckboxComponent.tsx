@@ -1,7 +1,7 @@
 import React from "react";
 import Checkbox  from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { CheckboxProps } from "../interfaces/interface";
+import { CheckboxProps } from "../../interfaces/interface";
 
 const CheckboxComponent: React.FC<CheckboxProps> = ({ label, checked, onChange}) => {
   return(

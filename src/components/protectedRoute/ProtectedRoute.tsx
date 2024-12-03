@@ -1,10 +1,8 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import { ProtectedRouteProps } from '../../interfaces/interface';
 
-interface ProtectedRouteProps {
-  isAuthenticated: boolean;
-  children: React.ReactNode;
-}
+
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ isAuthenticated, children }) => {
   if (!isAuthenticated) {

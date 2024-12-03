@@ -1,7 +1,7 @@
 import React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { TabProps } from '../interfaces/interface';
+import { TabProps } from '../../interfaces/interface';
 
 const TabComponent: React.FC<TabProps> = ({ value, onChange }) => {
   return (

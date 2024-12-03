@@ -1,7 +1,7 @@
 import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { IconButtonProps } from '../interfaces/interface';
+import { IconButtonProps } from '../../interfaces/interface';
 
 const IconButtonComponent: React.FC<IconButtonProps> = ({ onClick }) => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@mui/material";
-import { BoxProps } from "../interfaces/interface";
+import { BoxProps } from "../../interfaces/interface";
 
 const BoxComponent: React.FC<BoxProps> = ({ children }) => {
   return (

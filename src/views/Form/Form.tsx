@@ -88,6 +88,7 @@ const Form: React.FC = () => {
         {type === 'sleep' && <Sleep onChange={setDescription} value={description} />}
       </div>
       <button onClick={handleSave}>{id ? 'Salvar' : 'Criar'}</button>
+      <button onClick={handleDelete}>{id ? 'Apagar' : 'Cancelar'}</button>
     </div>
   );
 };

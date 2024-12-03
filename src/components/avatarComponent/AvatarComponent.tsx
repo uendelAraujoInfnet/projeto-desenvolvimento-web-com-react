@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar } from "@mui/material";
-import { AvatarProps } from "../interfaces/interface";
+import { AvatarProps } from "../../interfaces/interface";
 
 const AvatarComponent: React.FC<AvatarProps> = ({ name }) => {
   return (

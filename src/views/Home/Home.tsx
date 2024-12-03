@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import CustomList from '../../components/customListComponent/CustomList';
-import { fetchPaginatedItems } from '../../services/database';
+import { fetchPaginatedItems, deleteItem } from '../../services/database';
 import { useNavigate, useLocation } from 'react-router-dom';
+import CardComponent from '../../components/cardComponent/CardComponent';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 
 interface Item {
   id: string;
@@ -15,7 +17,7 @@ const Home: React.FC = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const itemsPerPage = 10;
+  const itemsPerPage = 50;
 
   // Carregar itens paginados do banco de dados
   const loadItems = async () => {
@@ -37,6 +39,20 @@ const Home: React.FC = () => {
     }
   };
 
+  // Função para excluir um item
+  const handleDelete = async (id: string) => {
+    if (window.confirm('Tem certeza que deseja excluir este registro?')) {
+      try {
+        await deleteItem('records', id);
+        setItems((prev) => prev.filter((item) => item.id !== id));
+        alert('Registro excluído com sucesso!');
+      } catch (error) {
+        console.error('Erro ao excluir o registro:', error);
+        alert('Erro ao excluir o registro.');
+      }
+    }
+  };
+
   // Carregar itens ao mudar de página
   useEffect(() => {
     loadItems();
@@ -51,19 +67,65 @@ const Home: React.FC = () => {
   }, [location.state, items]);
 
   return (
-    <div>
+    <div style={{ padding: '20px' }}>
       <h1>Lista de Registros</h1>
-      <button onClick={() => navigate('/form')} style={{ marginBottom: '20px' }}>
+      <button
+        onClick={() => navigate('/form')}
+        style={{
+          marginBottom: '20px',
+          padding: '10px 20px',
+          backgroundColor: '#4caf50',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px',
+        }}
+      >
         Adicionar Novo Registro
       </button>
       {items.length > 0 ? (
         <>
-          <CustomList
-            items={items}
-            onEdit={(id) => navigate(`/form/${id}`)}
-          />
+          <Grid container spacing={3}>
+            {items.map((item) => (
+              <Grid item xs={12} sm={6} md={4} key={item.id}>
+                <CardComponent
+                  title={`Registro #${item.id.substring(0, 5)}`}
+                  description={item.description}
+                >
+                  <div style={{ marginTop: '10px' }}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => navigate(`/form/${item.id}`)}
+                      style={{ marginRight: '10px' }}
+                    >
+                      Editar
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      onClick={() => handleDelete(item.id)}
+                    >
+                      Excluir
+                    </Button>
+                  </div>
+                </CardComponent>
+              </Grid>
+            ))}
+          </Grid>
           {hasMore && !loading && (
-            <button onClick={() => setPage((prev) => prev + 1)}>Carregar Mais</button>
+            <button
+              onClick={() => setPage((prev) => prev + 1)}
+              style={{
+                marginTop: '20px',
+                padding: '10px 20px',
+                backgroundColor: '#2196f3',
+                color: 'white',
+                border: 'none',
+                borderRadius: '5px',
+              }}
+            >
+              Carregar Mais
+            </button>
           )}
           {loading && <p>Carregando...</p>}
           {!hasMore && <p>Todos os itens foram carregados.</p>}

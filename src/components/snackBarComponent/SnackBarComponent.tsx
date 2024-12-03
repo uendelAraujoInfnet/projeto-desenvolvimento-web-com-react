@@ -1,6 +1,6 @@
 import React from 'react';
 import Snackbar from '@mui/material/Snackbar';
-import { SnackBarProps } from '../interfaces/interface';
+import { SnackBarProps } from '../../interfaces/interface';
 
 const SnackBarComponent: React.FC<SnackBarProps> = ({ open, message, onClose }) => {
   return (

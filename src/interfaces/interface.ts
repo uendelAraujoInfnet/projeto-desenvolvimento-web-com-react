@@ -1,3 +1,5 @@
+import { SupabaseClient } from "@supabase/supabase-js";
+
 export interface ALertProps {
   message: string;
   severity: 'success' | 'error' | 'info' | 'warning';
@@ -19,6 +21,7 @@ export interface BoxProps {
 export interface CardProps {
   title: string;
   description: string;
+  children?: React.ReactNode;
 }
 
 export interface CheckboxProps {
@@ -37,6 +40,11 @@ export interface FabProps {
 
 export interface IconButtonProps {
   onClick: () => void;
+}
+
+export interface ProtectedRouteProps {
+  isAuthenticated: boolean;
+  children: React.ReactNode;
 }
 
 export interface SnackBarProps {
@@ -66,4 +74,10 @@ export interface TypographyProps {
   text: string;
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'subtitle1' | 'subtitle2' | 'body1' | 'body2';
   color?: string;
+}
+
+interface AppContextProps {
+  supabase: SupabaseClient;
+  isAuthenticated: boolean;
+  setIsAuthenticated: (value: boolean) => void;
 }

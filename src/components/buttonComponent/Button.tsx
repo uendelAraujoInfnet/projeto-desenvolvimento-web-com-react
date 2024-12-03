@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import { CustomButtonProps } from '../interfaces/interface';
+import { CustomButtonProps } from '../../interfaces/interface';
 import { useNavigate } from 'react-router-dom';
 
 const CustomButton: React.FC<CustomButtonProps> = ({ label, navigateTo }) => {
