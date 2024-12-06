@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { fetchPaginatedItems, deleteItem } from '../../services/database';
-import { useNavigate, useLocation } from 'react-router-dom';
-import CardComponent from '../../components/cardComponent/CardComponent';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
+import React, { useEffect, useState } from "react";
+import { fetchPaginatedItems, deleteItem } from "../../services/database";
+import { useNavigate, useLocation } from "react-router-dom";
+import CardComponent from "../../components/cardComponent/CardComponent";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import supabase from "../../context/Context";
 
 interface Item {
   id: string;
@@ -25,7 +26,7 @@ const Home: React.FC = () => {
     setLoading(true);
 
     try {
-      const data: Item[] = await fetchPaginatedItems('records', page, itemsPerPage);
+      const data: Item[] = await fetchPaginatedItems("records", page, itemsPerPage);
 
       if (data.length < itemsPerPage) {
         setHasMore(false);
@@ -33,7 +34,7 @@ const Home: React.FC = () => {
 
       setItems((prev) => [...prev, ...data]);
     } catch (error) {
-      console.error('Erro ao carregar itens:', error);
+      console.error("Erro ao carregar itens:", error);
     } finally {
       setLoading(false);
     }
@@ -41,15 +42,25 @@ const Home: React.FC = () => {
 
   // Função para excluir um item
   const handleDelete = async (id: string) => {
-    if (window.confirm('Tem certeza que deseja excluir este registro?')) {
+    if (window.confirm("Tem certeza que deseja excluir este registro?")) {
       try {
-        await deleteItem('records', id);
+        await deleteItem("records", id);
         setItems((prev) => prev.filter((item) => item.id !== id));
-        alert('Registro excluído com sucesso!');
+        alert("Registro excluído com sucesso!");
       } catch (error) {
-        console.error('Erro ao excluir o registro:', error);
-        alert('Erro ao excluir o registro.');
+        console.error("Erro ao excluir o registro:", error);
+        alert("Erro ao excluir o registro.");
       }
+    }
+  };
+
+  // Realizar logout
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      navigate("/signin");
+    } catch (error) {
+      console.error("Erro ao realizar logout:", error);
     }
   };
 
@@ -67,21 +78,33 @@ const Home: React.FC = () => {
   }, [location.state, items]);
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div style={{ padding: "20px" }}>
       <h1>Lista de Registros</h1>
-      <button
-        onClick={() => navigate('/form')}
-        style={{
-          marginBottom: '20px',
-          padding: '10px 20px',
-          backgroundColor: '#4caf50',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-        }}
-      >
-        Adicionar Novo Registro
-      </button>
+      <div style={{ marginBottom: "20px", display: "flex", justifyContent: "space-between" }}>
+        <Button
+          variant="contained"
+          color="success"
+          onClick={() => navigate("/form")}
+          style={{ marginRight: "10px" }}
+        >
+          Adicionar Novo Registro
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => navigate("/dashboard")}
+          style={{ marginRight: "10px" }}
+        >
+          Dashboard
+        </Button>
+        <Button
+          variant="contained"
+          color="warning"
+          onClick={handleLogout}
+        >
+          Logout
+        </Button>
+      </div>
       {items.length > 0 ? (
         <>
           <Grid container spacing={3}>
@@ -91,18 +114,18 @@ const Home: React.FC = () => {
                   title={`Registro #${item.id.substring(0, 5)}`}
                   description={item.description}
                 >
-                  <div style={{ marginTop: '10px' }}>
+                  <div style={{ marginTop: "10px" }}>
                     <Button
                       variant="contained"
                       color="primary"
                       onClick={() => navigate(`/form/${item.id}`)}
-                      style={{ marginRight: '10px' }}
+                      style={{ marginRight: "10px" }}
                     >
                       Editar
                     </Button>
                     <Button
-                      variant="outlined"
-                      color="secondary"
+                      variant="contained"
+                      color="error"
                       onClick={() => handleDelete(item.id)}
                     >
                       Excluir
@@ -116,12 +139,12 @@ const Home: React.FC = () => {
             <button
               onClick={() => setPage((prev) => prev + 1)}
               style={{
-                marginTop: '20px',
-                padding: '10px 20px',
-                backgroundColor: '#2196f3',
-                color: 'white',
-                border: 'none',
-                borderRadius: '5px',
+                marginTop: "20px",
+                padding: "10px 20px",
+                backgroundColor: "#2196f3",
+                color: "white",
+                border: "none",
+                borderRadius: "5px",
               }}
             >
               Carregar Mais
@@ -131,7 +154,7 @@ const Home: React.FC = () => {
           {!hasMore && <p>Todos os itens foram carregados.</p>}
         </>
       ) : (
-        <p>{loading ? 'Carregando itens...' : 'Nenhum registro encontrado.'}</p>
+        <p>{loading ? "Carregando itens..." : "Nenhum registro encontrado."}</p>
       )}
     </div>
   );

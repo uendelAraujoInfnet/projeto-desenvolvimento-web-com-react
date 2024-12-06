@@ -1,18 +1,11 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
+import { GridProps } from '../../interfaces/interface';
 
-const GridComponent: React.FC = () => {
+const GridComponent: React.FC<GridProps> = ({children}) => {
   return (
     <Grid container spacing={2}>
-      <Grid item xs={6}>
-        Item 1
-      </Grid>
-      <Grid item xs={6}>
-        Item 2
-      </Grid>
-      <Grid item xs={12}>
-        Item 3
-      </Grid>
+      {children}
     </Grid>
   );
 };

@@ -7,6 +7,8 @@ export interface ALertProps {
 
 export interface CustomButtonProps {
   label: string;
+  onClick: () => void;
+  style?: React.CSSProperties;
   navigateTo: string;
 }
 
@@ -36,6 +38,10 @@ export interface ContainerProps {
 
 export interface FabProps {
   onClick: () => void;
+}
+
+export interface GridProps {
+  children: React.ReactNode;
 }
 
 export interface IconButtonProps {
